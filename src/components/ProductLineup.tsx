@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const AMAZON_URL = "https://www.amazon.com/dp/B0DKCV6QHB";
@@ -6,32 +7,37 @@ const products = [
   {
     title: "Toilet Paper",
     subtitle: "Ultra soft, 2-ply, 350 sheets",
-    emoji: "🧻",
+    image: "/images/toilet-paper-hero.png",
+    alt: "DRYT Ultra Soft Toilet Paper package",
     gradient: "from-primary-light to-blue-50",
     href: AMAZON_URL,
   },
   {
     title: "Paper Towels",
     subtitle: "Strong & absorbent for every mess",
-    emoji: "🧾",
+    image: "/images/paper-towels.png",
+    alt: "DRYT Paper Towels package",
     gradient: "from-accent-light to-orange-50",
     href: AMAZON_URL,
   },
   {
     title: "Disposable Plates",
     subtitle: "Sturdy plates for any occasion",
-    emoji: "🍽️",
+    image: "/images/plates-clean.png",
+    alt: "DRYT Disposable Plates stack",
     gradient: "from-emerald-50 to-green-50",
     href: AMAZON_URL,
   },
   {
     title: "Liquid Detergent",
     subtitle: "Tough on stains, gentle formula",
+    image: null,
+    alt: "",
     emoji: "🧴",
     gradient: "from-purple-50 to-violet-50",
     href: AMAZON_URL,
   },
-];
+] as const;
 
 export default function ProductLineup() {
   return (
@@ -64,9 +70,19 @@ export default function ProductLineup() {
                 className="product-card block bg-bg rounded-2xl overflow-hidden group"
               >
                 <div
-                  className={`bg-gradient-to-br ${p.gradient} h-52 flex items-center justify-center`}
+                  className={`bg-gradient-to-br ${p.gradient} h-52 flex items-center justify-center p-6`}
                 >
-                  <span className="text-6xl">{p.emoji}</span>
+                  {p.image ? (
+                    <Image
+                      src={p.image}
+                      alt={p.alt}
+                      width={200}
+                      height={200}
+                      className="object-contain w-full h-full drop-shadow-md"
+                    />
+                  ) : (
+                    <span className="text-6xl">{"emoji" in p ? p.emoji : ""}</span>
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="font-heading text-lg font-bold text-dark mb-1">

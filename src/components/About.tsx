@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const metrics = [
@@ -13,13 +14,14 @@ export default function About() {
         {/* Left — Photo area */}
         <ScrollReveal>
           <div className="relative max-w-md mx-auto lg:mx-0">
-            <div className="w-full aspect-[4/5] rounded-3xl bg-gradient-to-br from-primary-light via-white to-accent-light/40 flex items-center justify-center shadow-lg">
-              <div className="text-center">
-                <span className="text-6xl block mb-3">👩‍💼</span>
-                <span className="text-sm font-medium text-text-mid">
-                  Mary Ann Tuazon
-                </span>
-              </div>
+            <div className="w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-lg relative">
+              <Image
+                src="/images/mary-ann.png"
+                alt="Mary Ann Tuazon, founder of DRYT® and Velazon Enterprise LLC"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-dark/30 to-transparent" />
             </div>
 
             {/* Floating info cards */}

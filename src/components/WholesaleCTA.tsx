@@ -1,8 +1,16 @@
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 export default function WholesaleCTA() {
   return (
     <section className="py-24 lg:py-32 bg-dark relative overflow-hidden">
+      {/* Background trade show photo */}
+      <Image
+        src="/images/trade-show.png"
+        alt="DRYT booth at retail trade show"
+        fill
+        className="object-cover opacity-10 pointer-events-none"
+      />
       {/* Background blob decorations */}
       <div className="absolute top-0 left-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full bg-accent/10 blur-[100px] pointer-events-none" />

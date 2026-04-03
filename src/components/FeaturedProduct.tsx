@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const AMAZON_URL = "https://www.amazon.com/dp/B0DKCV6QHB";
@@ -20,11 +21,14 @@ export default function FeaturedProduct() {
               <span className="absolute top-6 left-8 font-heading text-[120px] lg:text-[160px] font-extrabold text-white/40 leading-none select-none">
                 350
               </span>
-              <div className="relative z-10 text-center">
-                <span className="text-7xl block mb-3">🧻</span>
-                <span className="text-sm font-medium text-text-mid">
-                  Product Photo
-                </span>
+              <div className="relative z-10 p-4">
+                <Image
+                  src="/images/toilet-paper-hero.png"
+                  alt="DRYT Ultra Soft Toilet Paper 12-roll package"
+                  width={400}
+                  height={400}
+                  className="object-contain w-full h-full drop-shadow-lg"
+                />
               </div>
             </div>
 

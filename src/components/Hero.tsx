@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const AMAZON_URL = "https://www.amazon.com/dp/B0DKCV6QHB";
@@ -95,13 +96,15 @@ export default function Hero() {
         {/* Right column — Product image */}
         <ScrollReveal className="relative" delay={200}>
           <div className="relative max-w-lg mx-auto">
-            <div className="w-full aspect-square rounded-3xl bg-gradient-to-br from-primary-light via-white to-accent-light flex items-center justify-center shadow-[0_20px_60px_-15px_rgb(21,101,168,0.15)]">
-              <div className="text-center">
-                <span className="text-7xl block mb-3">🧻</span>
-                <span className="text-sm font-medium text-text-mid">
-                  Product Photo
-                </span>
-              </div>
+            <div className="w-full aspect-square rounded-3xl bg-gradient-to-br from-primary-light via-white to-accent-light flex items-center justify-center shadow-[0_20px_60px_-15px_rgb(21,101,168,0.15)] overflow-hidden p-8">
+              <Image
+                src="/images/toilet-paper-hero.png"
+                alt="DRYT Ultra Soft Toilet Paper 12-roll package"
+                width={500}
+                height={500}
+                className="object-contain w-full h-full drop-shadow-lg"
+                priority
+              />
             </div>
 
             {/* Floating tags */}
