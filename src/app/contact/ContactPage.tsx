@@ -12,12 +12,35 @@ const SUBJECT_OPTIONS = [
   "Other",
 ];
 
+const FORM_ENDPOINT =
+  "https://ai-receptionist-snowy.vercel.app/api/webhooks/form-submission";
+const CLIENT_ID = "a239e44b-70da-462b-863d-ace97be36d80";
+
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: CLIENT_ID,
+        name: formData.get("name"),
+        email: formData.get("email"),
+        message: `[${formData.get("subject") || "General Inquiry"}] ${formData.get("message")}`,
+        service: "Website Inquiry",
+      }),
+    }).catch(() => {});
+
     setSubmitted(true);
+    setSubmitting(false);
   }
 
   return (
@@ -79,6 +102,7 @@ export default function ContactPage() {
                       </label>
                       <input
                         type="text"
+                        name="name"
                         required
                         className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
                         placeholder="Your full name"
@@ -91,6 +115,7 @@ export default function ContactPage() {
                       </label>
                       <input
                         type="email"
+                        name="email"
                         required
                         className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
                         placeholder="you@example.com"
@@ -101,7 +126,10 @@ export default function ContactPage() {
                       <label className="block text-sm font-semibold text-dark mb-1.5">
                         Subject
                       </label>
-                      <select className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white">
+                      <select
+                        name="subject"
+                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
+                      >
                         <option value="">Select a topic</option>
                         {SUBJECT_OPTIONS.map((s) => (
                           <option key={s} value={s}>
@@ -117,6 +145,7 @@ export default function ContactPage() {
                       </label>
                       <textarea
                         rows={6}
+                        name="message"
                         required
                         className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition resize-none bg-white"
                         placeholder="How can we help you?"
@@ -125,9 +154,10 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="bg-accent hover:bg-accent-glow text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(232,114,42,0.25)] text-sm cursor-pointer"
+                      disabled={submitting}
+                      className="bg-accent hover:bg-accent-glow text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(232,114,42,0.25)] text-sm cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {submitting ? "Sending..." : "Send Message"}
                     </button>
                   </form>
                 )}

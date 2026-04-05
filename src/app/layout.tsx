@@ -64,6 +64,10 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <script
+          src="https://ai-receptionist-snowy.vercel.app/api/tracking-script/a239e44b-70da-462b-863d-ace97be36d80"
+          async
+        />
       </body>
     </html>
   );

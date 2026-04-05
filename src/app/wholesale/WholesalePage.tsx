@@ -46,8 +46,13 @@ const PRODUCT_GRID = [
   },
 ];
 
+const FORM_ENDPOINT =
+  "https://ai-receptionist-snowy.vercel.app/api/webhooks/form-submission";
+const CLIENT_ID = "a239e44b-70da-462b-863d-ace97be36d80";
+
 export default function WholesalePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
 
   function toggleProduct(p: string) {
@@ -56,9 +61,43 @@ export default function WholesalePage() {
     );
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const parts = [
+      `Business: ${formData.get("business_name")}`,
+      selectedProducts.length > 0
+        ? `Products: ${selectedProducts.join(", ")}`
+        : null,
+      formData.get("volume")
+        ? `Volume: ${formData.get("volume")}`
+        : null,
+      formData.get("message")
+        ? String(formData.get("message"))
+        : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: CLIENT_ID,
+        name: formData.get("contact_name"),
+        email: formData.get("email"),
+        phone: formData.get("phone") || undefined,
+        message: parts,
+        service: "Wholesale Inquiry",
+      }),
+    }).catch(() => {});
+
     setSubmitted(true);
+    setSubmitting(false);
   }
 
   return (
@@ -277,6 +316,7 @@ export default function WholesalePage() {
                     </label>
                     <input
                       type="text"
+                      name="business_name"
                       required
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
                       placeholder="Your company name"
@@ -288,6 +328,7 @@ export default function WholesalePage() {
                     </label>
                     <input
                       type="text"
+                      name="contact_name"
                       required
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
                       placeholder="Your full name"
@@ -302,6 +343,7 @@ export default function WholesalePage() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
                       placeholder="you@company.com"
@@ -313,6 +355,7 @@ export default function WholesalePage() {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
                       placeholder="(555) 000-0000"
                     />
@@ -345,7 +388,10 @@ export default function WholesalePage() {
                   <label className="block text-sm font-semibold text-dark mb-1.5">
                     Estimated Monthly Volume
                   </label>
-                  <select className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white">
+                  <select
+                    name="volume"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition bg-white"
+                  >
                     <option value="">Select volume range</option>
                     {VOLUME_OPTIONS.map((v) => (
                       <option key={v} value={v}>
@@ -361,6 +407,7 @@ export default function WholesalePage() {
                   </label>
                   <textarea
                     rows={4}
+                    name="message"
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition resize-none bg-white"
                     placeholder="Tell us about your business and what you're looking for..."
                   />
@@ -368,9 +415,10 @@ export default function WholesalePage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-accent hover:bg-accent-glow text-white font-semibold py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(232,114,42,0.25)] text-sm cursor-pointer"
+                  disabled={submitting}
+                  className="w-full bg-accent hover:bg-accent-glow text-white font-semibold py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(232,114,42,0.25)] text-sm cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Submit Inquiry
+                  {submitting ? "Submitting..." : "Submit Inquiry"}
                 </button>
               </form>
             )}
