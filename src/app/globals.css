@@ -12,6 +12,8 @@
   --color-text-mid: #4A6178;
   --color-bg: #F8F9FC;
   --color-cream: #FDF9F5;
+  --color-walmart: #0071CE;
+  --color-walmart-dark: #005ea6;
 
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-sora), ui-sans-serif, system-ui, sans-serif;

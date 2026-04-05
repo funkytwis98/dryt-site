@@ -31,10 +31,10 @@ export default function WholesaleCTA() {
             needs.
           </p>
           <a
-            href="/contact"
+            href="/wholesale"
             className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-glow text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_24px_rgb(232,114,42,0.3)]"
           >
-            Contact for Wholesale Pricing
+            Wholesale Inquiries
             <svg
               width="16"
               height="16"

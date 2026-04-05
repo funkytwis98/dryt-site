@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Sora, Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -58,7 +60,11 @@ export default function RootLayout({
       lang="en"
       className={`${sora.variable} ${instrumentSerif.variable} ${plusJakarta.variable}`}
     >
-      <body className="font-sans text-text bg-bg antialiased">{children}</body>
+      <body className="font-sans text-text bg-bg antialiased">
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const AMAZON_URL = "https://www.amazon.com/dp/B0DKCV6QHB";
+const WALMART_URL = "https://www.walmart.com/ip/12211816559";
 
 const specs = [
   { label: "Sheets per Roll", value: "350" },
@@ -57,27 +58,50 @@ export default function FeaturedProduct() {
                   </div>
                 ))}
               </div>
-              <a
-                href={AMAZON_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(21,101,168,0.25)] w-fit"
-              >
-                Buy on Amazon
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={AMAZON_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(21,101,168,0.25)] w-fit"
                 >
-                  <path d="M7 17L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
-              </a>
+                  Buy on Amazon
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 17L17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </a>
+                <a
+                  href={WALMART_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 bg-walmart hover:bg-walmart-dark text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(0,113,206,0.25)] w-fit"
+                >
+                  Buy on Walmart
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 17L17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </ScrollReveal>

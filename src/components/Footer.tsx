@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 const AMAZON_URL = "https://www.amazon.com/dp/B0DKCV6QHB";
+const WALMART_URL = "https://www.walmart.com/ip/12211816559";
+const WALMART_STORE_URL = "https://www.walmart.com/global/seller/102534023";
 
 const columns = [
   {
@@ -16,8 +18,9 @@ const columns = [
     title: "Shop",
     links: [
       { label: "Amazon Store", href: AMAZON_URL, external: true },
+      { label: "Walmart Store", href: WALMART_STORE_URL, external: true },
+      { label: "Walmart Product", href: WALMART_URL, external: true },
       { label: "Wholesale", href: "/wholesale" },
-      { label: "Bulk Orders", href: "/contact" },
     ],
   },
   {
