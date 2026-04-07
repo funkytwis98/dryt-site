@@ -1,0 +1,111 @@
+import Image from "next/image";
+import ScrollReveal from "./ScrollReveal";
+
+const AMAZON_URL = "https://www.amazon.com/dp/B0DKCV6QHB";
+const WALMART_URL = "https://www.walmart.com/ip/12211816559";
+
+const specs = [
+  { label: "Sheets per Roll", value: "350" },
+  { label: "Ply", value: "2-Ply" },
+  { label: "Material", value: "Wood Pulp" },
+  { label: "Pack Size", value: "12 Rolls" },
+];
+
+export default function FeaturedProduct() {
+  return (
+    <section className="py-24 lg:py-32 bg-bg">
+      <div className="max-w-7xl mx-auto px-6">
+        <ScrollReveal>
+          <div className="bg-white rounded-3xl overflow-hidden shadow-[0_8px_40px_-12px_rgb(0,0,0,0.08)] grid lg:grid-cols-2">
+            {/* Left — Image area */}
+            <div className="relative bg-gradient-to-br from-primary-light to-accent-light/30 p-12 flex items-center justify-center min-h-[360px]">
+              <span className="absolute top-6 left-8 font-heading text-[120px] lg:text-[160px] font-extrabold text-white/40 leading-none select-none">
+                350
+              </span>
+              <div className="relative z-10 p-4">
+                <Image
+                  src="/images/toilet-paper-hero.png"
+                  alt="DRYT Ultra Soft Toilet Paper 12-roll package"
+                  width={400}
+                  height={400}
+                  className="object-contain w-full h-full drop-shadow-lg"
+                />
+              </div>
+            </div>
+
+            {/* Right — Details */}
+            <div className="p-10 lg:p-14 flex flex-col justify-center">
+              <span className="inline-block bg-accent-light text-accent text-xs font-bold tracking-[0.15em] uppercase px-4 py-1.5 rounded-full mb-6 w-fit">
+                Bestseller on Amazon
+              </span>
+              <h3 className="font-heading text-3xl lg:text-4xl font-extrabold text-dark tracking-tight mb-8">
+                Dryt Ultra Soft
+                <br />
+                Toilet Paper
+              </h3>
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {specs.map((s) => (
+                  <div
+                    key={s.label}
+                    className="bg-bg rounded-xl px-4 py-3.5"
+                  >
+                    <span className="block text-xs text-text-mid font-medium mb-0.5">
+                      {s.label}
+                    </span>
+                    <span className="font-heading font-bold text-dark">
+                      {s.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={AMAZON_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(21,101,168,0.25)] w-fit"
+                >
+                  Buy on Amazon
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 17L17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </a>
+                <a
+                  href={WALMART_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 bg-walmart hover:bg-walmart-dark text-white font-semibold px-8 py-4 rounded-full transition-colors shadow-[0_4px_16px_rgb(0,113,206,0.25)] w-fit"
+                >
+                  Buy on Walmart
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 17L17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}

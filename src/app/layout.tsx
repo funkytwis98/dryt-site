@@ -1,32 +1,52 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Sora, Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-const playfair = Playfair_Display({
+const sora = Sora({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-playfair",
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-sora",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-dm-sans",
+  weight: "400",
+  style: "italic",
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plus-jakarta",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Tom Integrations — AI for Small Business",
+  title: "DRYT® — The Comfy You Deserve | Premium Paper Products",
   description:
-    "Never miss another call. AI receptionist and social media management for small businesses in Chattanooga and beyond.",
+    "Premium ultra-soft toilet paper and home essentials by DRYT®. Sustainably sourced wood pulp, non-toxic, woman-owned. Shop on Amazon.",
+  keywords: [
+    "DRYT",
+    "toilet paper",
+    "paper towels",
+    "premium paper products",
+    "ultra soft",
+    "eco-friendly",
+    "woman-owned",
+    "Velazon Enterprise",
+  ],
   openGraph: {
-    title: "Tom Integrations — AI for Small Business",
+    title: "DRYT® — The Comfy You Deserve",
     description:
-      "Never miss another call. AI receptionist and social media management for small businesses.",
+      "Premium ultra-soft toilet paper and home essentials. Sustainably sourced, non-toxic, woman-owned.",
     type: "website",
     locale: "en_US",
-    siteName: "Tom Integrations",
+    siteName: "DRYT®",
   },
 };
 
@@ -36,9 +56,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
-      <body className="font-body text-primary antialiased">
+    <html
+      lang="en"
+      className={`${sora.variable} ${instrumentSerif.variable} ${plusJakarta.variable}`}
+    >
+      <body className="font-sans text-text bg-bg antialiased">
+        <Navbar />
         {children}
+        <Footer />
         <script
           src="https://ai-receptionist-snowy.vercel.app/api/tracking-script/a239e44b-70da-462b-863d-ace97be36d80"
           async
